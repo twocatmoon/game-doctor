@@ -1,0 +1,45 @@
+{
+  "name": "@twocatmoon/game-doctor",
+  "private": false,
+  "version": "0.0.0",
+  "description": "Game Doctor generates diagnostic reports for HTML5 video games in easy-to-share formats. Reports contain information about graphics, device, network, fps, screenshots, client fingerprint, and much more. Easy to implement, easy to use, and fully configurable with key-bindings and global window hooks.",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && tsc --project tsconfig.build.json",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twocatmoon/game-doctor.git"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "report",
+    "diagnostic",
+    "screenshot",
+    "html5",
+    "game",
+    "support"
+  ],
+  "author": "Two-Cat Moon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twocatmoon/game-doctor/issues"
+  },
+  "homepage": "https://github.com/twocatmoon/game-doctor#readme",
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
+  }
+}
