@@ -47,7 +47,10 @@ export declare class GameDoctor {
     onTick: () => void;
     private _fpsTickInterval?;
     private _fpsEl?;
+    private _noticeTimeout?;
+    private _noticeEl?;
     constructor(options: GameDoctorOptions);
+    private _showNotice;
     showFps(showFps?: boolean): void;
     hideFps(): void;
     setFingerprintInfo(info: any): void;
