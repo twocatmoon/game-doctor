@@ -53,6 +53,9 @@ export class GameDoctor {
     private _fpsTickInterval?: number
     private _fpsEl?: HTMLDivElement
 
+    private _noticeTimeout?: number
+    private _noticeEl?: HTMLDivElement
+
     constructor (options: GameDoctorOptions) {
         this._options = options
         this.onTick = trackFps()
@@ -99,6 +102,35 @@ export class GameDoctor {
                 }
             })
         }
+    }
+
+    private _showNotice (message: string) {
+        if (this._noticeEl) {
+            document.body.removeChild(this._noticeEl)
+            this._noticeEl = undefined
+        }
+        clearTimeout(this._noticeTimeout)
+
+        const el = document.createElement('div')
+        el.style.position = 'fixed'
+        el.style.top = '0'
+        el.style.right = '0'
+        el.style.zIndex = Number.MAX_SAFE_INTEGER.toString()
+        el.style.backgroundColor = '#000'
+        el.style.color = '#fff'
+        el.style.fontFamily = 'monospace'
+        el.style.fontSize = '12px'
+        el.style.padding = '5px'
+        el.innerHTML = message
+
+        this._noticeEl = el
+        document.body.appendChild(el)
+
+        this._noticeTimeout = setTimeout(() => {
+            if (!this._noticeEl) return
+            document.body.removeChild(this._noticeEl)
+            this._noticeEl = undefined
+        }, 1000) as unknown as number
     }
 
     showFps (showFps = true) {
@@ -230,6 +262,7 @@ export class GameDoctor {
                         'image/png': blob
                     })
                 ])
+                this._showNotice('Report copied to clipboard!')
             }
 
             return dataUrl
@@ -242,6 +275,7 @@ export class GameDoctor {
 
             if (this._options.copyToClipboard) {
                 navigator.clipboard.writeText(output)
+                this._showNotice('Report copied to clipboard!')
             }
 
             return output
